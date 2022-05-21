@@ -1,0 +1,88 @@
+Git Submodule
+==================
+git submodule add https://github.com/nlohmann/json.git external/json
+
+How do I know if graphviz is installed?
+========================================
+Run "dot -V" from the command prompt. If GraphViz is installed and configured you'll get it's version.
+
+Note1:
+=======
+Fetch content is for cmake based library, but sub module can be used with all with some modifications.
+
+Doxygen
+=========
+sudo apt install doxygen
+
+Code Coverage
+================
+cmake -H. -Bbuild -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=On
+cmake --build build --config Debug --target coverage -j4
+
+Linux: Software Installation
+=================================
+sudo apt-get update
+sudo apt-get upgrade
+ 
+# Mandatory
+sudo apt install gcc
+sudo apt install g++
+sudo apt install gdb
+sudo apt install make
+sudo apt install cmake
+sudo apt install git
+sudo apt install doxygen
+sudo apt install python3
+sudo apt install python3-pip
+
+# Optional
+sudo apt install lcov
+sudo apt install gcovr
+sudo apt install ccache
+sudo apt install cppcheck
+sudo apt install clang-format
+sudo apt install clang-tidy
+
+clang-tidy -checks=* -p ./ ../ChaiScript/src/main.cpp  from Json Turner youtube
+
+
+Reference From Official website
+================================
+CMake
+Generate a compile database:
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .
+The file compile_commands.json is created in the current folder. Now run
+Cppcheck like this:
+cppcheck --project=compile_commands.json
+To ignore certain folders you can use -i. This will skip analysis of source files in
+the foo folder.
+cppcheck --project=compile_commands.json -ifoo
+
+It’s a good idea to use a Cppcheck build dir. On the command line use
+--cppcheck-build-dir. 
+
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON . --cppcheck-build-dir=/home/akashkumarsinha007/CppDev/CMake_Tooling/1_HelloWorld/build/cppCheckOutputDir
+
+cppcheck --project=compile_commands.json -i/home/akashkumarsinha007/CppDev/CMake_Tooling/1_HelloWorld/build/_deps/ --cppcheck-build-dir=/home/akashkumarsinha007/CppDev/CMake_Tooling/1_HelloWorld/build/cppCheckOutputDir
+
+
+HTML Report
+You can convert the XML output from Cppcheck into a HTML report. You’ll
+need Python and the pygments module (http://pygments.org/) for this to work.
+In the Cppcheck source tree there is a folder htmlreport that contains a script
+that transforms a Cppcheck XML file into HTML output.
+This command generates the help screen:
+htmlreport/cppcheck-htmlreport -h
+The output screen says:
+Usage: cppcheck-htmlreport [options]
+Options:
+-h, --help show this help message and exit
+--file=FILE The cppcheck xml output file to read defects from.
+Default is reading from stdin.
+--report-dir=REPORT_DIR
+The directory where the html report content is written.
+--source-dir=SOURCE_DIR
+Base directory where source code files can be found.
+Example usage:
+./cppcheck gui/test.cpp --xml 2> err.xml
+htmlreport/cppcheck-htmlreport --file=err.xml --report-dir=test1 --source-dir=.

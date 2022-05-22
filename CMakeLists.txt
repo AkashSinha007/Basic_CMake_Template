@@ -17,10 +17,10 @@ include(AddGitSubmodule)
 include(FetchContent)
 include(Docs)
 
-if (ENABLE_TESTING)
-    enable_testing()
-    include(CTest)
-    endif()
+
+enable_testing()
+include(CTest)
+
 if (ENABLE_COVERAGE)
     include(CodeCoverage)
     append_coverage_compiler_flags()

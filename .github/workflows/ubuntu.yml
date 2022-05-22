@@ -33,10 +33,9 @@ jobs:
     - name: testing with gtest
       run: |
         cd build
-        cd bin
         cd tests
         ./unit_tests
-        cd ../../..
+        cd ../..
     - name: testing with ctest runner
       run: |
         cd build

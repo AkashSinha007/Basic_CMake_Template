@@ -12,10 +12,6 @@ if (ENABLE_TESTING)
     target_link_libraries(${TEST_MAIN} PRIVATE
         gtest_main)
 
-    if (${ENABLE_WARNINGS})
-        target_set_warnings(TARGET ${TEST_MAIN} ENABLE ON AS_ERROR OFF)
-    endif()
-
     if (ENABLE_COVERAGE)
         set(COVERAGE_MAIN "coverage")
         set(COVERAGE_EXCLUDES

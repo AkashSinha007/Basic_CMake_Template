@@ -34,7 +34,9 @@ jobs:
       run: |
         cd build
         cd bin
+        cd tests
         ./unit_tests
+        cd ../../..
     - name: testing with ctest runner
       run: |
         cd build
